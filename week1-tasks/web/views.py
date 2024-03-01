@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session
+from flask import Blueprint, render_template, redirect, url_for,session
+from .models import User
+from . import db
+import re
 
 views = Blueprint('views', __name__)
 
@@ -7,10 +10,6 @@ views = Blueprint('views', __name__)
 @views.route('/home')
 def home():
     if 'user_id' in session:
-        return render_template('home.html', username=session['username'])
+        user = User.query.filter_by(id=session['user_id']).first()
+        return render_template('home.html', username=user.username)
     return redirect(url_for('auth.login'))
-
-@views.route('/profile')
-def profile():
-    return render_template('profile.html')
-

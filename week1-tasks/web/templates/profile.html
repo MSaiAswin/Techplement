@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {% block
+content %}
+
+<h3 align="center">Profile</h3>
+<hr>
+    <div class="container-fluid">
+        <label for="username">Username</label>
+    </div>
+    <form class="container-fluid d-flex" action="" method="post">
+    <input
+      type="text"
+      name="username"
+      id="username"
+      class="form-control"
+      placeholder="Enter your Username"
+      value="{{user.username}}"
+      {% if not edit_name %}disabled{% endif %}
+    />
+
+    
+      <button
+        type="submit"
+        {% if not edit_name %}value="edit_name"{% endif %}
+        {% if edit_name %}value="edited_name"{% endif %}
+        name="action"
+        {% if not edit_name %}class="btn btn-primary"{% endif %}
+        {% if edit_name %}class="btn btn-success"{% endif %}
+        
+      >
+      {% if not edit_name %}Edit{% endif %}
+      {% if edit_name %}Save{% endif %}
+        
+      </button>
+    </form>
+
+
+<br />
+<div class="container-fluid">
+    <label for="email">Email Address</label>
+</div>
+
+    <form class="container-fluid d-flex" action="" method="post">
+    <input
+      type="text"
+      name="email"
+      id="email"
+      class="form-control"
+      placeholder="Enter your Email"
+      value="{{user.email}}"
+      {% if not edit_email %} disabled {% endif %}
+    />
+
+    
+      <button
+      type="submit"
+      {% if not edit_email %}value="edit_email"{% endif %}
+      {% if edit_email %}value="edited_email"{% endif %}
+      name="action"
+      {% if not edit_email %}class="btn btn-primary"{% endif %}
+      {% if edit_email %}class="btn btn-success"{% endif %}
+      >
+      {% if not edit_email %}Edit{% endif %}
+      {% if edit_email %}Save{% endif %}
+      </button>
+    </form>
+ 
+<br />
+<div class="container-fluid">
+    <a href="{{url_for('auth.change_password')}}" class="btn btn-primary">Change Password</a>
+</div>
+<br>
+<div class="container-fluid">
+    <form action="" method="post">
+        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete Account</button>
+    </form>  
+</div>
+
+{% endblock %}
