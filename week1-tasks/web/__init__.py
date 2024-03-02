@@ -6,6 +6,12 @@ db = SQLAlchemy()
 DB_NAME = "database.db"
 
 def create_app():
+    """
+    Creates and configures the Flask application.
+
+    Returns:
+        app (Flask): The configured Flask application.
+    """
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "secret"
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
@@ -25,6 +31,15 @@ def create_app():
     return app
 
 def create_database(db):
+    """
+    Creates the database if it does not exist.
+
+    Args:
+        db (SQLAlchemy): The SQLAlchemy instance.
+
+    Returns:
+        None
+    """
     if not path.exists('website/' + DB_NAME):
         db.create_all()
         print('Created Database!')

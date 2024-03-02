@@ -114,6 +114,22 @@ def sign_up():
 
 @auth.route('/profile', methods=['GET', 'POST'])
 def profile():
+    """
+    Handle the profile functionality.
+
+    If the 'user_id' key exists in the session, it retrieves the user from the database.
+    If the request method is POST, it performs different actions based on the 'action' parameter.
+    If the action is 'edit_name', it renders the profile page with the option to edit the username.
+    If the action is 'edit_email', it renders the profile page with the option to edit the email.
+    If the action is 'edited_name', it validates and updates the username.
+    If the action is 'edited_email', it validates and updates the email.
+    If the action is 'delete', it deletes the user account.
+    If the 'user_id' key does not exist in the session, it redirects to the login page.
+
+    Returns:
+        If the 'user_id' key exists in the session, it renders the profile page.
+        If the 'user_id' key does not exist in the session, it redirects to the login page.
+    """
     if 'user_id' in session:
         user = User.query.filter_by(id=session['user_id']).first()
         if request.method == 'POST':
@@ -160,6 +176,19 @@ def profile():
 
 @auth.route('/change-password', methods=['GET', 'POST'])
 def change_password():
+    """
+    Handle the change password functionality.
+
+    If the 'user_id' key exists in the session, it retrieves the user from the database.
+    If the request method is POST, it checks the old password against the user's password.
+    If the old password is correct, it validates and updates the new password.
+    If the old password is incorrect, it displays an error message.
+    If the 'user_id' key does not exist in the session, it redirects to the login page.
+
+    Returns:
+        If the 'user_id' key exists in the session, it renders the change password page.
+        If the 'user_id' key does not exist in the session, it redirects to the login page.
+    """
     if 'user_id' in session:
         user = User.query.filter_by(id=session['user_id']).first()
         if request.method == 'POST':
