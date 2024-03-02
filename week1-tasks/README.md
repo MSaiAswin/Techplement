@@ -27,6 +27,7 @@ git clone https://github.com/MSaiAswin/Techplement.git
 2. Navigate into the project directory:
 
 ```bash
+cd Techplement
 cd week1-tasks
 ```
 
